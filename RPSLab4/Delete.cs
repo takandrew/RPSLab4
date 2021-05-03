@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.Data;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace RPSLab4
 {
-    public partial class UpdateForm : Form
+    public partial class DeleteForm : Form
     {
         String dbFileName;
         SQLiteConnection m_dbConn;
         SQLiteCommand m_sqlCmd;
         DataTable DBTable = new DataTable();
-        public UpdateForm()
+        public DeleteForm()
         {
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
         }
 
-        private void UpdatingButton_Click(object sender, EventArgs e)
+        private void DeletingButton_Click(object sender, EventArgs e)
         {
             m_sqlCmd = new SQLiteCommand();
             dbFileName = @"C:\Users\Takandrew\source\repos\RPSLab4\RPSLab4DB.db";
@@ -45,33 +45,21 @@ namespace RPSLab4
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='"+ UpdateIDUpDown.Value +"'";
+                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + DeleteIDUpDown.Value + "'";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
                 adapter.Fill(DBTable);
                 if (DBTable.Rows.Count != 0)
                 {
-                    if ((UpdateNameTextBox.Text.ToUpper() != UpdateNameTextBox.Text.ToLower())
-                    && (UpdateOwnerTextBox.Text.ToUpper() != UpdateOwnerTextBox.Text.ToLower())
-                    && (UpdateOrbitTextBox.Text.ToUpper() != UpdateOrbitTextBox.Text.ToLower()))
-                    {
-                        m_sqlCmd.CommandText = "UPDATE ArtiSpaceObjects SET Obj_name ='" + UpdateNameTextBox.Text + "'" +
-                            ", Obj_Owner ='" + UpdateOwnerTextBox.Text + "'," +
-                            " Obj_Orbit ='" + UpdateOrbitTextBox.Text + "'" +
-                            " WHERE Obj_ID ='" + UpdateIDUpDown.Value + "'";
-                        m_sqlCmd.Connection = m_dbConn;
-                        m_sqlCmd.ExecuteNonQuery();
-                        MessageBox.Show("Запись успешно изменена.", "Изменение");
-                        m_dbConn.Close();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Заполните все поля", "Изменение");
-                    }
+                    m_sqlCmd.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + DeleteIDUpDown.Value + "'";
+                    m_sqlCmd.Connection = m_dbConn;
+                    m_sqlCmd.ExecuteNonQuery();
+                    MessageBox.Show("Запись успешно удалена.", "Удаление");
+                    m_dbConn.Close();
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("БД не содержит записи с данным идентификатором", "Изменение");
+                    MessageBox.Show("БД не содержит записи с данным идентификатором", "Удаление");
                 }
             }
             catch (Exception ex)
@@ -82,7 +70,7 @@ namespace RPSLab4
             }
         }
 
-        private void UpdateForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainForm man = new MainForm();
             man.Activate();

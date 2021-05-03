@@ -36,7 +36,6 @@ namespace RPSLab4
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbStatusText = new System.Windows.Forms.Label();
             this.DGridTable = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGridTable)).BeginInit();
@@ -70,6 +69,7 @@ namespace RPSLab4
             this.DeleteButton.TabIndex = 3;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // menuStrip1
             // 
@@ -79,7 +79,7 @@ namespace RPSLab4
             this.InfoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -104,15 +104,6 @@ namespace RPSLab4
             this.InfoToolStripMenuItem.Text = "Справка";
             this.InfoToolStripMenuItem.Click += new System.EventHandler(this.InfoToolStripMenuItem_Click);
             // 
-            // lbStatusText
-            // 
-            this.lbStatusText.AutoSize = true;
-            this.lbStatusText.Location = new System.Drawing.Point(27, 456);
-            this.lbStatusText.Name = "lbStatusText";
-            this.lbStatusText.Size = new System.Drawing.Size(86, 17);
-            this.lbStatusText.TabIndex = 5;
-            this.lbStatusText.Text = "Disconected";
-            // 
             // DGridTable
             // 
             this.DGridTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -130,7 +121,6 @@ namespace RPSLab4
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 486);
-            this.Controls.Add(this.lbStatusText);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.AddButton);
@@ -158,7 +148,6 @@ namespace RPSLab4
         private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InfoToolStripMenuItem;
-        private System.Windows.Forms.Label lbStatusText;
         private System.Windows.Forms.DataGridView DGridTable;
     }
 }

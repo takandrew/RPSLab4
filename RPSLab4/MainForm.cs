@@ -10,6 +10,7 @@ namespace RPSLab4
         InfoForm showInfoForm = null;
         InsertForm showInsertForm = null;
         UpdateForm showUpdateForm = null;
+        DeleteForm showDeleteForm = null;
         String dbFileName;
         SQLiteConnection m_dbConn;
         SQLiteCommand m_sqlCmd;
@@ -22,7 +23,7 @@ namespace RPSLab4
             DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта");
             DGridTable.Columns.Add("Obj_Name", "Имя объекта");
             DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
-            DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта");
+            DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта"); 
             DGridTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DGridTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
@@ -55,25 +56,23 @@ namespace RPSLab4
                 m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
                 m_dbConn.Open();
                 m_sqlCmd.Connection = m_dbConn;
-
-                lbStatusText.Text = "Connected";
+                SQuery = "SELECT * FROM ArtiSpaceObjects";
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
+                adapter.Fill(DBTable);
+                if (DBTable.Rows.Count > 0)
+                {
+                    for (int i = 0; i < DBTable.Rows.Count; i++)
+                        DGridTable.Rows.Add(DBTable.Rows[i].ItemArray);
+                }
+                else
+                    MessageBox.Show("БД пуста");
+                m_dbConn.Close();
             }
-            catch (SQLiteException ex)
+            catch (Exception ex)
             {
-                lbStatusText.Text = "Disconnected";
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Произошла ошибка подключения к БД \n" + ex.Message, "Ошибка");
+                this.Close();
             }
-            SQuery = "SELECT * FROM ArtiSpaceObjects";
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
-            adapter.Fill(DBTable);
-            if (DBTable.Rows.Count > 0) 
-            {
-                for (int i = 0; i < DBTable.Rows.Count; i++)
-                    DGridTable.Rows.Add(DBTable.Rows[i].ItemArray);
-            }
-            else
-                MessageBox.Show("Database is empty");
-            m_dbConn.Close();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -113,6 +112,21 @@ namespace RPSLab4
             {
                 showUpdateForm.Show();
                 showUpdateForm.Focus();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            //Вызов формы и запрет на открытие множества одинаковых окон
+            if (showDeleteForm == null || showDeleteForm.IsDisposed)
+            {
+                showDeleteForm = new DeleteForm();
+                showDeleteForm.Show();
+            }
+            else
+            {
+                showDeleteForm.Show();
+                showDeleteForm.Focus();
             }
         }
     }
