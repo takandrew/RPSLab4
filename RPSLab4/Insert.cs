@@ -26,14 +26,26 @@ namespace RPSLab4
             {
                 MessageBox.Show("Open connection with database");
                 return;
-            } 
+            }
             try
-            { 
-                m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
+            {
+                if ((AddNameTextBox.Text.ToUpper() != AddNameTextBox.Text.ToLower())
+                    && (AddOwnerTextBox.Text.ToUpper() != AddOwnerTextBox.Text.ToLower())
+                    && (AddOrbitTextBox.Text.ToUpper() != AddOrbitTextBox.Text.ToLower()))
+                {
+                    m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
                     " ('Obj_Name', 'Obj_Owner', 'Obj_Orbit') values ('" + AddNameTextBox.Text + "'," +
-                    " '"+ AddOwnerTextBox.Text +"', '"+ AddOrbitTextBox.Text +"')";
-                m_sqlCmd.Connection = m_dbConn;
-                m_sqlCmd.ExecuteNonQuery(); 
+                    " '" + AddOwnerTextBox.Text + "', '" + AddOrbitTextBox.Text + "')";
+                    m_sqlCmd.Connection = m_dbConn;
+                    m_sqlCmd.ExecuteNonQuery();
+                    MessageBox.Show("Запись успешно добавлена.", "Добавление");
+                    m_dbConn.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Заполните все поля", "Добавление");
+                }
             }
             catch (Exception ex)
             {
@@ -41,10 +53,12 @@ namespace RPSLab4
                 m_dbConn.Close();
                 return;
             }
-            MessageBox.Show("Запись успешно добавлена.", "Добавление");
-            m_dbConn.Close();
-            this.Close();
         }
 
+        private void InsertForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainForm man = new MainForm();
+            man.Activate();
+        }
     }
 }

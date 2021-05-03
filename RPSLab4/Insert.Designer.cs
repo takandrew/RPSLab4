@@ -111,6 +111,7 @@ namespace RPSLab4
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InsertForm";
             this.Text = "Добавление";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InsertForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

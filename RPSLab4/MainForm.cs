@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RPSLab4
@@ -15,6 +9,7 @@ namespace RPSLab4
     {
         InfoForm showInfoForm = null;
         InsertForm showInsertForm = null;
+        UpdateForm showUpdateForm = null;
         String dbFileName;
         SQLiteConnection m_dbConn;
         SQLiteCommand m_sqlCmd;
@@ -24,6 +19,12 @@ namespace RPSLab4
         {
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
+            DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта");
+            DGridTable.Columns.Add("Obj_Name", "Имя объекта");
+            DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
+            DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта");
+            DGridTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DGridTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void InfoToolStripMenuItem_Click(object sender, EventArgs e) //Вывод справочного окна
@@ -45,7 +46,6 @@ namespace RPSLab4
         {
             DBTable.Clear();
             DGridTable.Rows.Clear();
-            DGridTable.Columns.Clear();
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
             string SQuery;
@@ -66,11 +66,7 @@ namespace RPSLab4
             SQuery = "SELECT * FROM ArtiSpaceObjects";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
             adapter.Fill(DBTable);
-            DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта"); DGridTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            DGridTable.Columns.Add("Obj_Name", "Имя объекта");
-            DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
-            DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта");
-            if (DBTable.Rows.Count > 0)
+            if (DBTable.Rows.Count > 0) 
             {
                 for (int i = 0; i < DBTable.Rows.Count; i++)
                     DGridTable.Rows.Add(DBTable.Rows[i].ItemArray);
@@ -98,7 +94,26 @@ namespace RPSLab4
                 showInsertForm.Show();
                 showInsertForm.Focus();
             }
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
             UpdateTable();
+        }
+
+        private void ChangeButton_Click(object sender, EventArgs e)
+        {
+            //Вызов формы и запрет на открытие множества одинаковых окон
+            if (showUpdateForm == null || showUpdateForm.IsDisposed)
+            {
+                showUpdateForm = new UpdateForm();
+                showUpdateForm.Show();
+            }
+            else
+            {
+                showUpdateForm.Show();
+                showUpdateForm.Focus();
+            }
         }
     }
 }
