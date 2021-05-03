@@ -78,7 +78,7 @@ namespace RPSLab4
             this.InfoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,7 +87,7 @@ namespace RPSLab4
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SaveDataToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
             // SaveDataToolStripMenuItem
@@ -99,7 +99,7 @@ namespace RPSLab4
             // InfoToolStripMenuItem
             // 
             this.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem";
-            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
+            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.InfoToolStripMenuItem.Text = "Справка";
             this.InfoToolStripMenuItem.Click += new System.EventHandler(this.InfoToolStripMenuItem_Click);
             // 
@@ -117,6 +117,7 @@ namespace RPSLab4
             this.DGridTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGridTable.Location = new System.Drawing.Point(12, 68);
             this.DGridTable.Name = "DGridTable";
+            this.DGridTable.ReadOnly = true;
             this.DGridTable.RowHeadersVisible = false;
             this.DGridTable.RowHeadersWidth = 51;
             this.DGridTable.RowTemplate.Height = 24;

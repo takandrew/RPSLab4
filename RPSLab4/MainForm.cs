@@ -49,7 +49,7 @@ namespace RPSLab4
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
             string SQuery;
-            dbFileName = "RPSLab4.db";
+            dbFileName = @"C:\Users\Takandrew\source\repos\RPSLab4\RPSLab4DB.db";
             try
             {
                 m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
@@ -63,13 +63,13 @@ namespace RPSLab4
                 lbStatusText.Text = "Disconnected";
                 MessageBox.Show("Error: " + ex.Message);
             }
-            SQuery = "SELECT * FROM ArtiSpaceObject";
+            SQuery = "SELECT * FROM ArtiSpaceObjects";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
             adapter.Fill(DBTable);
             DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта"); DGridTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DGridTable.Columns.Add("Obj_Name", "Имя объекта");
-            DGridTable.Columns.Add("Obj_From", "Откуда");
-            DGridTable.Columns.Add("Obj_To", "Куда");
+            DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
+            DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта");
             if (DBTable.Rows.Count > 0)
             {
                 for (int i = 0; i < DBTable.Rows.Count; i++)
@@ -77,6 +77,7 @@ namespace RPSLab4
             }
             else
                 MessageBox.Show("Database is empty");
+            m_dbConn.Close();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -97,7 +98,6 @@ namespace RPSLab4
                 showInsertForm.Show();
                 showInsertForm.Focus();
             }
-            m_dbConn.Close();
             UpdateTable();
         }
     }

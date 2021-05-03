@@ -30,8 +30,8 @@ namespace RPSLab4
         private void InitializeComponent()
         {
             this.AddNameTextBox = new System.Windows.Forms.TextBox();
-            this.AddFromTextBox = new System.Windows.Forms.TextBox();
-            this.AddToTextBox = new System.Windows.Forms.TextBox();
+            this.AddOwnerTextBox = new System.Windows.Forms.TextBox();
+            this.AddOrbitTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,19 +45,19 @@ namespace RPSLab4
             this.AddNameTextBox.Size = new System.Drawing.Size(229, 22);
             this.AddNameTextBox.TabIndex = 2;
             // 
-            // AddFromTextBox
+            // AddOwnerTextBox
             // 
-            this.AddFromTextBox.Location = new System.Drawing.Point(32, 111);
-            this.AddFromTextBox.Name = "AddFromTextBox";
-            this.AddFromTextBox.Size = new System.Drawing.Size(229, 22);
-            this.AddFromTextBox.TabIndex = 3;
+            this.AddOwnerTextBox.Location = new System.Drawing.Point(32, 111);
+            this.AddOwnerTextBox.Name = "AddOwnerTextBox";
+            this.AddOwnerTextBox.Size = new System.Drawing.Size(229, 22);
+            this.AddOwnerTextBox.TabIndex = 3;
             // 
-            // AddToTextBox
+            // AddOrbitTextBox
             // 
-            this.AddToTextBox.Location = new System.Drawing.Point(32, 166);
-            this.AddToTextBox.Name = "AddToTextBox";
-            this.AddToTextBox.Size = new System.Drawing.Size(229, 22);
-            this.AddToTextBox.TabIndex = 4;
+            this.AddOrbitTextBox.Location = new System.Drawing.Point(32, 166);
+            this.AddOrbitTextBox.Name = "AddOrbitTextBox";
+            this.AddOrbitTextBox.Size = new System.Drawing.Size(229, 22);
+            this.AddOrbitTextBox.TabIndex = 4;
             // 
             // label2
             // 
@@ -73,18 +73,18 @@ namespace RPSLab4
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(29, 91);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.Size = new System.Drawing.Size(73, 17);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Откуда";
+            this.label3.Text = "Владелец";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(29, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.Size = new System.Drawing.Size(58, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Куда";
+            this.label4.Text = "Орбита";
             // 
             // AddingButton
             // 
@@ -105,8 +105,8 @@ namespace RPSLab4
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.AddToTextBox);
-            this.Controls.Add(this.AddFromTextBox);
+            this.Controls.Add(this.AddOrbitTextBox);
+            this.Controls.Add(this.AddOwnerTextBox);
             this.Controls.Add(this.AddNameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InsertForm";
@@ -118,8 +118,8 @@ namespace RPSLab4
 
         #endregion
         private System.Windows.Forms.TextBox AddNameTextBox;
-        private System.Windows.Forms.TextBox AddFromTextBox;
-        private System.Windows.Forms.TextBox AddToTextBox;
+        private System.Windows.Forms.TextBox AddOwnerTextBox;
+        private System.Windows.Forms.TextBox AddOrbitTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
