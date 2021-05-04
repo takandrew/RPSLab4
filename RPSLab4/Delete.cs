@@ -35,12 +35,13 @@ namespace RPSLab4
                 string SQuery;
                 try
                 {
+                    m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
                     m_dbConn.Open();
                     m_sqlCmd.Connection = m_dbConn;
                 }
                 catch (SQLiteException ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show(ex.Message, "Ошибка");
                 }
                 SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + DeleteIDUpDown.Value + "'"; //Запрос выборки
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
