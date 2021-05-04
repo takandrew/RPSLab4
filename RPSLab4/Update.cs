@@ -7,7 +7,7 @@ namespace RPSLab4
 {
     public partial class UpdateForm : Form
     {
-        String dbFileName;
+        MainForm mainForm = new MainForm();
         SQLiteConnection m_dbConn;
         SQLiteCommand m_sqlCmd;
         DataTable DBTable = new DataTable();
@@ -20,8 +20,7 @@ namespace RPSLab4
         private void UpdatingButton_Click(object sender, EventArgs e)
         {
             m_sqlCmd = new SQLiteCommand();
-            dbFileName = @"C:\Users\Takandrew\source\repos\RPSLab4\RPSLab4DB.db";
-            m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
+            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
             m_dbConn.Open();
             if (m_dbConn.State != ConnectionState.Open)
             {
@@ -34,10 +33,9 @@ namespace RPSLab4
                 m_dbConn = new SQLiteConnection();
                 m_sqlCmd = new SQLiteCommand();
                 string SQuery;
-                dbFileName = @"C:\Users\Takandrew\source\repos\RPSLab4\RPSLab4DB.db";
                 try
                 {
-                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
+                    m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
                     m_dbConn.Open();
                     m_sqlCmd.Connection = m_dbConn;
                 }

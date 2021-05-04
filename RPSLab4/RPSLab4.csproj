@@ -140,6 +140,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>AutoShowInfo.Designer.cs</LastGenOutput>
     </None>
+    <None Include="RPSLab4DB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

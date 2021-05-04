@@ -11,7 +11,7 @@ namespace RPSLab4
         InsertForm showInsertForm = null;
         UpdateForm showUpdateForm = null;
         DeleteForm showDeleteForm = null;
-        String dbFileName;
+        public String dbFileName = @".\RPSLab4DB.db";
         SQLiteConnection m_dbConn;
         SQLiteCommand m_sqlCmd;
         DataTable DBTable = new DataTable();
@@ -58,7 +58,6 @@ namespace RPSLab4
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
             string SQuery;
-            dbFileName = @"C:\Users\Takandrew\source\repos\RPSLab4\RPSLab4DB.db";
             try
             {
                 m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
