@@ -37,6 +37,9 @@ namespace RPSLab4
             this.SaveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DGridTable = new System.Windows.Forms.DataGridView();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.настройкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AutoShowInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGridTable)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +79,7 @@ namespace RPSLab4
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
+            this.настройкаToolStripMenuItem,
             this.InfoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -88,7 +92,7 @@ namespace RPSLab4
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SaveDataToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
             // SaveDataToolStripMenuItem
@@ -96,11 +100,12 @@ namespace RPSLab4
             this.SaveDataToolStripMenuItem.Name = "SaveDataToolStripMenuItem";
             this.SaveDataToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
             this.SaveDataToolStripMenuItem.Text = "Сохранить таблицу в файл";
+            this.SaveDataToolStripMenuItem.Click += new System.EventHandler(this.SaveDataToolStripMenuItem_Click);
             // 
             // InfoToolStripMenuItem
             // 
             this.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem";
-            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
             this.InfoToolStripMenuItem.Text = "Справка";
             this.InfoToolStripMenuItem.Click += new System.EventHandler(this.InfoToolStripMenuItem_Click);
             // 
@@ -115,6 +120,29 @@ namespace RPSLab4
             this.DGridTable.RowTemplate.Height = 24;
             this.DGridTable.Size = new System.Drawing.Size(765, 344);
             this.DGridTable.TabIndex = 0;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.saveFileDialog1.FilterIndex = 2;
+            // 
+            // настройкаToolStripMenuItem
+            // 
+            this.настройкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AutoShowInfoToolStripMenuItem});
+            this.настройкаToolStripMenuItem.Name = "настройкаToolStripMenuItem";
+            this.настройкаToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
+            this.настройкаToolStripMenuItem.Text = "Настройка";
+            // 
+            // AutoShowInfoToolStripMenuItem
+            // 
+            this.AutoShowInfoToolStripMenuItem.Checked = true;
+            this.AutoShowInfoToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AutoShowInfoToolStripMenuItem.Name = "AutoShowInfoToolStripMenuItem";
+            this.AutoShowInfoToolStripMenuItem.Size = new System.Drawing.Size(394, 26);
+            this.AutoShowInfoToolStripMenuItem.Text = "Выводить справку при запуске программы";
+            this.AutoShowInfoToolStripMenuItem.Click += new System.EventHandler(this.AutoShowInfoToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -149,6 +177,9 @@ namespace RPSLab4
         private System.Windows.Forms.ToolStripMenuItem SaveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InfoToolStripMenuItem;
         private System.Windows.Forms.DataGridView DGridTable;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem настройкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AutoShowInfoToolStripMenuItem;
     }
 }
 

@@ -21,11 +21,19 @@ namespace RPSLab4
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
             DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта");
-            DGridTable.Columns.Add("Obj_Name", "Имя объекта");
+            DGridTable.Columns.Add("Obj_Name", "Название объекта");
             DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
             DGridTable.Columns.Add("Obj_Orbit", "Орбита объекта"); 
             DGridTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DGridTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            if (AutoShowInfo.Default.autoShowInfo == true) //Проверка необходимости вывода справки при запуске
+            {
+                AutoShowInfoToolStripMenuItem.Checked = true;
+                showInfoForm = new InfoForm();
+                showInfoForm.Show();
+            }
+            else
+                AutoShowInfoToolStripMenuItem.Checked = false;
         }
 
         private void InfoToolStripMenuItem_Click(object sender, EventArgs e) //Вывод справочного окна
@@ -127,6 +135,52 @@ namespace RPSLab4
             {
                 showDeleteForm.Show();
                 showDeleteForm.Focus();
+            }
+        }
+
+        private void SaveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return; //Случай с отменой выбора файла
+            string saveFilename = saveFileDialog1.FileName;
+            try
+            {
+                string resultString = "\t\t\t Таблица значений: \n";
+                for (int k = 0; k < DGridTable.Columns.Count; k++)
+                    resultString += DGridTable.Columns[k].HeaderCell.Value + "\t";
+                resultString += "\n";
+                for (int i = 0; i < DGridTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < DGridTable.Columns.Count; j++)
+                    {
+                        resultString += DGridTable.Rows[i].Cells[j].Value + "\t\t\t";
+                    }
+                    resultString += "\n";
+                }
+                System.IO.File.WriteAllText(saveFilename, resultString);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+                return;
+            }
+            MessageBox.Show("Файл сохранен", "Файл");
+        }
+
+        private void AutoShowInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Установка настройки необходимости вывода справки при запуске программы
+            if (AutoShowInfoToolStripMenuItem.Checked) //Если до нажатия был включен вывод
+            {
+                AutoShowInfoToolStripMenuItem.Checked = false;
+                AutoShowInfo.Default.autoShowInfo = false;
+                AutoShowInfo.Default.Save();
+            }
+            else //Если до нажатия был выключен вывод
+            {
+                AutoShowInfoToolStripMenuItem.Checked = true;
+                AutoShowInfo.Default.autoShowInfo = true;
+                AutoShowInfo.Default.Save();
             }
         }
     }

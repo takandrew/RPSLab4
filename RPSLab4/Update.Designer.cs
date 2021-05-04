@@ -77,9 +77,9 @@ namespace RPSLab4
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 91);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 17);
+            this.label1.Size = new System.Drawing.Size(131, 17);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Имя объекта";
+            this.label1.Text = "Название объекта";
             // 
             // label2
             // 
