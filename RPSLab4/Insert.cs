@@ -8,35 +8,36 @@ namespace RPSLab4
     public partial class InsertForm : Form
     {
         MainForm mainForm = new MainForm();
-        SQLiteConnection m_dbConn;
-        SQLiteCommand m_sqlCmd;
+        SQLiteConnection m_dbConn; //Соединение
+        SQLiteCommand m_sqlCmd; //Команда
         public InsertForm()
         {
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
         }
 
-        private void AddingButton_Click(object sender, EventArgs e)
+        private void AddingButton_Click(object sender, EventArgs e) //Нажатие кнопки "Добавить"
         {
             m_sqlCmd = new SQLiteCommand();
-            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
+            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName); //Создание соединения
             m_dbConn.Open();
             if (m_dbConn.State != ConnectionState.Open)
             {
-                MessageBox.Show("Open connection with database");
+                MessageBox.Show("Откройте соединение с БД");
                 return;
             }
             try
             {
+                //Проверка введенных данных
                 if ((AddNameTextBox.Text.ToUpper() != AddNameTextBox.Text.ToLower())
                     && (AddOwnerTextBox.Text.ToUpper() != AddOwnerTextBox.Text.ToLower())
                     && (AddOrbitTextBox.Text.ToUpper() != AddOrbitTextBox.Text.ToLower()))
                 {
                     m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
                     " ('Obj_Name', 'Obj_Owner', 'Obj_Orbit') values ('" + AddNameTextBox.Text + "'," +
-                    " '" + AddOwnerTextBox.Text + "', '" + AddOrbitTextBox.Text + "')";
+                    " '" + AddOwnerTextBox.Text + "', '" + AddOrbitTextBox.Text + "')"; //Запрос добавления
                     m_sqlCmd.Connection = m_dbConn;
-                    m_sqlCmd.ExecuteNonQuery();
+                    m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
                     MessageBox.Show("Запись успешно добавлена.", "Добавление");
                     m_dbConn.Close();
                     this.Close();
@@ -54,10 +55,9 @@ namespace RPSLab4
             }
         }
 
-        private void InsertForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void InsertForm_FormClosed(object sender, FormClosedEventArgs e) //При закрытии формы
         {
-            MainForm man = new MainForm();
-            man.Activate();
+            mainForm.Activate();
         }
     }
 }

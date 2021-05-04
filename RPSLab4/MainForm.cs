@@ -11,15 +11,16 @@ namespace RPSLab4
         InsertForm showInsertForm = null;
         UpdateForm showUpdateForm = null;
         DeleteForm showDeleteForm = null;
-        public String dbFileName = @".\RPSLab4DB.db";
-        SQLiteConnection m_dbConn;
-        SQLiteCommand m_sqlCmd;
-        DataTable DBTable = new DataTable();
+        public string dbFileName = @".\RPSLab4DB.db"; //Адрес БД
+        SQLiteConnection m_dbConn; //Соединение
+        SQLiteCommand m_sqlCmd; //Команда
+        DataTable DBTable = new DataTable(); //Хранение данных для таблицы
 
         public MainForm()
         {
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
+            //Добавление столбцов таблицы
             DGridTable.Columns.Add("Obj_ID", "Идентификатор объекта");
             DGridTable.Columns.Add("Obj_Name", "Название объекта");
             DGridTable.Columns.Add("Obj_Owner", "Владелец объекта");
@@ -51,7 +52,7 @@ namespace RPSLab4
             }
         }
 
-        public void UpdateTable()
+        public void UpdateTable() //Вывод БД в таблицу
         {
             DBTable.Clear();
             DGridTable.Rows.Clear();
@@ -60,11 +61,12 @@ namespace RPSLab4
             string SQuery;
             try
             {
-                m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
-                m_dbConn.Open();
-                m_sqlCmd.Connection = m_dbConn;
-                SQuery = "SELECT * FROM ArtiSpaceObjects";
+                m_dbConn = new SQLiteConnection("Data Source=" + dbFileName); //Создание соединения
+                m_dbConn.Open(); 
+                m_sqlCmd.Connection = m_dbConn; //Указание соединения для команды
+                SQuery = "SELECT * FROM ArtiSpaceObjects"; //Запрос всех данных БД
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
+                //Заполнение таблицы данными БД
                 adapter.Fill(DBTable);
                 if (DBTable.Rows.Count > 0)
                 {
@@ -82,12 +84,12 @@ namespace RPSLab4
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e) //При первом запуске основной формы
         {
-            UpdateTable();
+            UpdateTable(); 
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e) //Нажатие кнопки "Добавить"
         {
             //Вызов формы и запрет на открытие множества одинаковых окон
             if (showInsertForm == null || showInsertForm.IsDisposed)
@@ -102,12 +104,13 @@ namespace RPSLab4
             }
         }
 
-        private void MainForm_Activated(object sender, EventArgs e)
+        private void MainForm_Activated(object sender, EventArgs e) //Активация формы
         {
+            //Используется для обновления таблицы из других форм
             UpdateTable();
         }
 
-        private void ChangeButton_Click(object sender, EventArgs e)
+        private void ChangeButton_Click(object sender, EventArgs e) //Нажатие кнопки "Изменить"
         {
             //Вызов формы и запрет на открытие множества одинаковых окон
             if (showUpdateForm == null || showUpdateForm.IsDisposed)
@@ -122,7 +125,7 @@ namespace RPSLab4
             }
         }
 
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e) //Нажатие кнопки "Удалить"
         {
             //Вызов формы и запрет на открытие множества одинаковых окон
             if (showDeleteForm == null || showDeleteForm.IsDisposed)
@@ -137,7 +140,7 @@ namespace RPSLab4
             }
         }
 
-        private void SaveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveDataToolStripMenuItem_Click(object sender, EventArgs e) //Сохранение таблицы в файл
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return; //Случай с отменой выбора файла
@@ -166,7 +169,7 @@ namespace RPSLab4
             MessageBox.Show("Файл сохранен", "Файл");
         }
 
-        private void AutoShowInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AutoShowInfoToolStripMenuItem_Click(object sender, EventArgs e) //Нажатие настроек вывода справки на экран
         {
             //Установка настройки необходимости вывода справки при запуске программы
             if (AutoShowInfoToolStripMenuItem.Checked) //Если до нажатия был включен вывод

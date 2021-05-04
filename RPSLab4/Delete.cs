@@ -8,23 +8,23 @@ namespace RPSLab4
     public partial class DeleteForm : Form
     {
         MainForm mainForm = new MainForm();
-        SQLiteConnection m_dbConn;
-        SQLiteCommand m_sqlCmd;
-        DataTable DBTable = new DataTable();
+        SQLiteConnection m_dbConn; //Соединение
+        SQLiteCommand m_sqlCmd; //Команда
+        DataTable DBTable = new DataTable(); //Хранение данных для таблицы
         public DeleteForm()
         {
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
         }
 
-        private void DeletingButton_Click(object sender, EventArgs e)
+        private void DeletingButton_Click(object sender, EventArgs e) //Нажатие кнопки "Удалить
         {
             m_sqlCmd = new SQLiteCommand();
-            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
+            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName); //Создание соединения
             m_dbConn.Open();
             if (m_dbConn.State != ConnectionState.Open)
             {
-                MessageBox.Show("Open connection with database");
+                MessageBox.Show("Откройте соединение с БД");
                 return;
             }
             try
@@ -35,7 +35,6 @@ namespace RPSLab4
                 string SQuery;
                 try
                 {
-                    m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
                     m_dbConn.Open();
                     m_sqlCmd.Connection = m_dbConn;
                 }
@@ -43,14 +42,14 @@ namespace RPSLab4
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + DeleteIDUpDown.Value + "'";
+                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + DeleteIDUpDown.Value + "'"; //Запрос выборки
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
                 adapter.Fill(DBTable);
                 if (DBTable.Rows.Count != 0)
                 {
-                    m_sqlCmd.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + DeleteIDUpDown.Value + "'";
+                    m_sqlCmd.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + DeleteIDUpDown.Value + "'"; //Запрос удаления
                     m_sqlCmd.Connection = m_dbConn;
-                    m_sqlCmd.ExecuteNonQuery();
+                    m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
                     MessageBox.Show("Запись успешно удалена.", "Удаление");
                     m_dbConn.Close();
                     this.Close();
@@ -68,10 +67,9 @@ namespace RPSLab4
             }
         }
 
-        private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e) //При закрытии формы
         {
-            MainForm man = new MainForm();
-            man.Activate();
+            mainForm.Activate();
         }
     }
 }
