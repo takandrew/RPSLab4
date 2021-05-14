@@ -40,21 +40,21 @@ namespace RPSLab4
             // 
             // AddNameTextBox
             // 
-            this.AddNameTextBox.Location = new System.Drawing.Point(32, 57);
+            this.AddNameTextBox.Location = new System.Drawing.Point(49, 57);
             this.AddNameTextBox.Name = "AddNameTextBox";
             this.AddNameTextBox.Size = new System.Drawing.Size(229, 22);
             this.AddNameTextBox.TabIndex = 2;
             // 
             // AddOwnerTextBox
             // 
-            this.AddOwnerTextBox.Location = new System.Drawing.Point(32, 111);
+            this.AddOwnerTextBox.Location = new System.Drawing.Point(49, 111);
             this.AddOwnerTextBox.Name = "AddOwnerTextBox";
             this.AddOwnerTextBox.Size = new System.Drawing.Size(229, 22);
             this.AddOwnerTextBox.TabIndex = 3;
             // 
             // AddOrbitTextBox
             // 
-            this.AddOrbitTextBox.Location = new System.Drawing.Point(32, 166);
+            this.AddOrbitTextBox.Location = new System.Drawing.Point(49, 166);
             this.AddOrbitTextBox.Name = "AddOrbitTextBox";
             this.AddOrbitTextBox.Size = new System.Drawing.Size(229, 22);
             this.AddOrbitTextBox.TabIndex = 4;
@@ -62,7 +62,7 @@ namespace RPSLab4
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 37);
+            this.label2.Location = new System.Drawing.Point(46, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 17);
             this.label2.TabIndex = 5;
@@ -71,7 +71,7 @@ namespace RPSLab4
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 91);
+            this.label3.Location = new System.Drawing.Point(46, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 17);
             this.label3.TabIndex = 6;
@@ -80,7 +80,7 @@ namespace RPSLab4
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 146);
+            this.label4.Location = new System.Drawing.Point(46, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 17);
             this.label4.TabIndex = 7;
@@ -88,7 +88,7 @@ namespace RPSLab4
             // 
             // AddingButton
             // 
-            this.AddingButton.Location = new System.Drawing.Point(12, 217);
+            this.AddingButton.Location = new System.Drawing.Point(29, 217);
             this.AddingButton.Name = "AddingButton";
             this.AddingButton.Size = new System.Drawing.Size(283, 43);
             this.AddingButton.TabIndex = 8;
@@ -100,7 +100,7 @@ namespace RPSLab4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 269);
+            this.ClientSize = new System.Drawing.Size(337, 269);
             this.Controls.Add(this.AddingButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

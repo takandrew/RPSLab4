@@ -10,7 +10,7 @@ namespace RPSLab4
         MainForm mainForm = new MainForm();
         SQLiteConnection m_dbConn; //Соединение
         SQLiteCommand m_sqlCmd; //Команда
-        DataTable DBTable = new DataTable(); //Хранение данных для таблицы
+        DataTable dBTable = new DataTable(); //Хранение данных для таблицы
         public DeleteForm()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace RPSLab4
             }
             try
             {
-                DBTable.Clear();
+                dBTable.Clear();
                 m_dbConn = new SQLiteConnection();
                 m_sqlCmd = new SQLiteCommand();
                 string SQuery;
@@ -45,8 +45,8 @@ namespace RPSLab4
                 }
                 SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + DeleteIDUpDown.Value + "'"; //Запрос выборки
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
-                adapter.Fill(DBTable);
-                if (DBTable.Rows.Count != 0)
+                adapter.Fill(dBTable);
+                if (dBTable.Rows.Count != 0)
                 {
                     m_sqlCmd.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + DeleteIDUpDown.Value + "'"; //Запрос удаления
                     m_sqlCmd.Connection = m_dbConn;

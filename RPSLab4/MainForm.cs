@@ -14,7 +14,7 @@ namespace RPSLab4
         public string dbFileName = @".\RPSLab4DB.db"; //Адрес БД
         SQLiteConnection m_dbConn; //Соединение
         SQLiteCommand m_sqlCmd; //Команда
-        DataTable DBTable = new DataTable(); //Хранение данных для таблицы
+        DataTable dBTable = new DataTable(); //Хранение данных для таблицы
 
         public MainForm()
         {
@@ -54,7 +54,7 @@ namespace RPSLab4
 
         public void UpdateTable() //Вывод БД в таблицу
         {
-            DBTable.Clear();
+            dBTable.Clear();
             DGridTable.Rows.Clear();
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
@@ -67,11 +67,11 @@ namespace RPSLab4
                 SQuery = "SELECT * FROM ArtiSpaceObjects"; //Запрос всех данных БД
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
                 //Заполнение таблицы данными БД
-                adapter.Fill(DBTable);
-                if (DBTable.Rows.Count > 0)
+                adapter.Fill(dBTable);
+                if (dBTable.Rows.Count > 0)
                 {
-                    for (int i = 0; i < DBTable.Rows.Count; i++)
-                        DGridTable.Rows.Add(DBTable.Rows[i].ItemArray);
+                    for (int i = 0; i < dBTable.Rows.Count; i++)
+                        DGridTable.Rows.Add(dBTable.Rows[i].ItemArray);
                 }
                 else
                     MessageBox.Show("БД пуста");

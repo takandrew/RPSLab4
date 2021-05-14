@@ -29,9 +29,9 @@ namespace RPSLab4
             try
             {
                 //Проверка введенных данных
-                if ((AddNameTextBox.Text.ToUpper() != AddNameTextBox.Text.ToLower())
-                    && (AddOwnerTextBox.Text.ToUpper() != AddOwnerTextBox.Text.ToLower())
-                    && (AddOrbitTextBox.Text.ToUpper() != AddOrbitTextBox.Text.ToLower()))
+                if (!string.IsNullOrWhiteSpace(AddNameTextBox.Text)
+                    && !string.IsNullOrWhiteSpace(AddOwnerTextBox.Text)
+                    && !string.IsNullOrWhiteSpace(AddOrbitTextBox.Text))
                 {
                     m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
                     " ('Obj_Name', 'Obj_Owner', 'Obj_Orbit') values ('" + AddNameTextBox.Text + "'," +

@@ -10,7 +10,7 @@ namespace RPSLab4
         MainForm mainForm = new MainForm();
         SQLiteConnection m_dbConn; //Соединение
         SQLiteCommand m_sqlCmd; //Команда
-        DataTable DBTable = new DataTable(); //Хранение данных для таблицы
+        DataTable dBTable = new DataTable(); //Хранение данных для таблицы
         public UpdateForm()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace RPSLab4
             }
             try
             {
-                DBTable.Clear();
+                dBTable.Clear();
                 m_dbConn = new SQLiteConnection();
                 m_sqlCmd = new SQLiteCommand();
                 string SQuery;
@@ -45,13 +45,13 @@ namespace RPSLab4
                 }
                 SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='"+ UpdateIDUpDown.Value +"'"; //Запрос с условием
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
-                adapter.Fill(DBTable);
-                if (DBTable.Rows.Count != 0)
+                adapter.Fill(dBTable);
+                if (dBTable.Rows.Count != 0)
                 {
                     //Проверка введенных данных
-                    if ((UpdateNameTextBox.Text.ToUpper() != UpdateNameTextBox.Text.ToLower())
-                    && (UpdateOwnerTextBox.Text.ToUpper() != UpdateOwnerTextBox.Text.ToLower())
-                    && (UpdateOrbitTextBox.Text.ToUpper() != UpdateOrbitTextBox.Text.ToLower())) 
+                    if (!string.IsNullOrWhiteSpace(UpdateNameTextBox.Text)
+                    && !string.IsNullOrWhiteSpace(UpdateOwnerTextBox.Text) 
+                    && !string.IsNullOrWhiteSpace(UpdateOrbitTextBox.Text))
                     {
                         m_sqlCmd.CommandText = "UPDATE ArtiSpaceObjects SET Obj_name ='" + UpdateNameTextBox.Text + "'" +
                             ", Obj_Owner ='" + UpdateOwnerTextBox.Text + "'," +
