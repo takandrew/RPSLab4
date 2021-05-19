@@ -35,11 +35,11 @@ namespace RPSLab4
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AutoShowInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DGridTable = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.настройкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AutoShowInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGridTable)).BeginInit();
             this.SuspendLayout();
@@ -92,7 +92,7 @@ namespace RPSLab4
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SaveDataToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
             // SaveDataToolStripMenuItem
@@ -101,31 +101,6 @@ namespace RPSLab4
             this.SaveDataToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
             this.SaveDataToolStripMenuItem.Text = "Сохранить таблицу в файл";
             this.SaveDataToolStripMenuItem.Click += new System.EventHandler(this.SaveDataToolStripMenuItem_Click);
-            // 
-            // InfoToolStripMenuItem
-            // 
-            this.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem";
-            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
-            this.InfoToolStripMenuItem.Text = "Справка";
-            this.InfoToolStripMenuItem.Click += new System.EventHandler(this.InfoToolStripMenuItem_Click);
-            // 
-            // DGridTable
-            // 
-            this.DGridTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGridTable.Location = new System.Drawing.Point(12, 68);
-            this.DGridTable.Name = "DGridTable";
-            this.DGridTable.ReadOnly = true;
-            this.DGridTable.RowHeadersVisible = false;
-            this.DGridTable.RowHeadersWidth = 51;
-            this.DGridTable.RowTemplate.Height = 24;
-            this.DGridTable.Size = new System.Drawing.Size(765, 344);
-            this.DGridTable.TabIndex = 0;
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "txt";
-            this.saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            this.saveFileDialog1.FilterIndex = 2;
             // 
             // настройкаToolStripMenuItem
             // 
@@ -143,6 +118,35 @@ namespace RPSLab4
             this.AutoShowInfoToolStripMenuItem.Size = new System.Drawing.Size(394, 26);
             this.AutoShowInfoToolStripMenuItem.Text = "Выводить справку при запуске программы";
             this.AutoShowInfoToolStripMenuItem.Click += new System.EventHandler(this.AutoShowInfoToolStripMenuItem_Click);
+            // 
+            // InfoToolStripMenuItem
+            // 
+            this.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem";
+            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.InfoToolStripMenuItem.Text = "Справка";
+            this.InfoToolStripMenuItem.Click += new System.EventHandler(this.InfoToolStripMenuItem_Click);
+            // 
+            // DGridTable
+            // 
+            this.DGridTable.AllowUserToAddRows = false;
+            this.DGridTable.AllowUserToDeleteRows = false;
+            this.DGridTable.AllowUserToResizeColumns = false;
+            this.DGridTable.AllowUserToResizeRows = false;
+            this.DGridTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGridTable.Location = new System.Drawing.Point(12, 68);
+            this.DGridTable.Name = "DGridTable";
+            this.DGridTable.ReadOnly = true;
+            this.DGridTable.RowHeadersVisible = false;
+            this.DGridTable.RowHeadersWidth = 51;
+            this.DGridTable.RowTemplate.Height = 24;
+            this.DGridTable.Size = new System.Drawing.Size(765, 344);
+            this.DGridTable.TabIndex = 0;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.saveFileDialog1.FilterIndex = 2;
             // 
             // MainForm
             // 

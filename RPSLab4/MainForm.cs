@@ -10,11 +10,14 @@ namespace RPSLab4
         InfoForm showInfoForm = null;
         InsertForm showInsertForm = null;
         UpdateForm showUpdateForm = null;
-        DeleteForm showDeleteForm = null;
         public string dbFileName = @".\RPSLab4DB.db"; //Адрес БД
         SQLiteConnection m_dbConn; //Соединение
         SQLiteCommand m_sqlCmd; //Команда
         DataTable dBTable = new DataTable(); //Хранение данных для таблицы
+        ArtiSpaceObject spaceObject = new ArtiSpaceObject();
+        SQLiteConnection m_dbConn1; //Соединение
+        SQLiteCommand m_sqlCmd1; //Команда
+        DataTable dBTable1 = new DataTable(); //Хранение данных для таблицы
 
         public MainForm()
         {
@@ -74,7 +77,9 @@ namespace RPSLab4
                         DGridTable.Rows.Add(dBTable.Rows[i].ItemArray);
                 }
                 else
-                    MessageBox.Show("БД пуста");
+                {
+                    DGridTable.Rows.Add();
+                }
                 m_dbConn.Close();
             }
             catch (Exception ex)
@@ -112,10 +117,24 @@ namespace RPSLab4
 
         private void ChangeButton_Click(object sender, EventArgs e) //Нажатие кнопки "Изменить"
         {
+            try
+            {
+                int rowNum = DGridTable.CurrentCell.RowIndex;
+                spaceObject.objID = Convert.ToInt32(DGridTable.Rows[rowNum].Cells[0].Value);
+                spaceObject.objName = DGridTable.Rows[rowNum].Cells[1].Value.ToString();
+                spaceObject.objOwner = DGridTable.Rows[rowNum].Cells[2].Value.ToString();
+                spaceObject.objOrbit = DGridTable.Rows[rowNum].Cells[3].Value.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+                return;
+            }
             //Вызов формы и запрет на открытие множества одинаковых окон
             if (showUpdateForm == null || showUpdateForm.IsDisposed)
             {
-                showUpdateForm = new UpdateForm();
+                showUpdateForm = new UpdateForm(spaceObject);
                 showUpdateForm.Show();
             }
             else
@@ -123,20 +142,39 @@ namespace RPSLab4
                 showUpdateForm.Show();
                 showUpdateForm.Focus();
             }
+            
         }
 
         private void DeleteButton_Click(object sender, EventArgs e) //Нажатие кнопки "Удалить"
         {
-            //Вызов формы и запрет на открытие множества одинаковых окон
-            if (showDeleteForm == null || showDeleteForm.IsDisposed)
+            int rowNum = DGridTable.CurrentCell.RowIndex;
+            spaceObject.objID = Convert.ToInt32(DGridTable.Rows[rowNum].Cells[0].Value);
+            if (MessageBox.Show("Вы уверены, что хотите удалить запись с идентификатором: '" + spaceObject.objID + "'", "Удаление", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                showDeleteForm = new DeleteForm();
-                showDeleteForm.Show();
+                Deleting(spaceObject.objID, dbFileName);
+                MessageBox.Show("Запись успешно удалена.", "Удаление");
             }
-            else
+            UpdateTable();
+        }
+
+        public void Deleting(int obj_ID, string dbFileNameD)
+        {
+            try
             {
-                showDeleteForm.Show();
-                showDeleteForm.Focus();
+                dBTable1.Clear();
+                m_dbConn1 = new SQLiteConnection("Data Source=" + dbFileNameD);
+                m_sqlCmd1 = new SQLiteCommand();
+                m_dbConn1.Open();
+                m_sqlCmd1.Connection = m_dbConn1;
+                m_sqlCmd1.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + obj_ID + "'"; //Запрос удаления
+                m_sqlCmd1.ExecuteNonQuery(); //Выполнение запроса
+                m_dbConn1.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+                m_dbConn1.Close();
+                return;
             }
         }
 

@@ -65,12 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Delete.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Delete.Designer.cs">
-      <DependentUpon>Delete.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ArtiSpaceObject.cs" />
     <Compile Include="InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,9 +97,6 @@
     <Compile Include="Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Delete.resx">
-      <DependentUpon>Delete.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InfoForm.resx">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +133,9 @@
       <LastGenOutput>AutoShowInfo.Designer.cs</LastGenOutput>
     </None>
     <None Include="RPSLab4DB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="RPSLab4TestDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

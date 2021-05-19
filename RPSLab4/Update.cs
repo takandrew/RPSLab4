@@ -11,16 +11,36 @@ namespace RPSLab4
         SQLiteConnection m_dbConn; //Соединение
         SQLiteCommand m_sqlCmd; //Команда
         DataTable dBTable = new DataTable(); //Хранение данных для таблицы
-        public UpdateForm()
+        int objectID;
+        ArtiSpaceObject spaceobj = new ArtiSpaceObject();
+        public UpdateForm(ArtiSpaceObject t)
         {
+            spaceobj = t;
             InitializeComponent();
             MaximizeBox = false; //Отключение возможности растягивания окна
         }
 
         private void UpdatingButton_Click(object sender, EventArgs e) //Нажатие кнопки "Изменить"
         {
+            //Проверка введенных данных
+            if (!string.IsNullOrWhiteSpace(UpdateNameTextBox.Text)
+            && !string.IsNullOrWhiteSpace(UpdateOwnerTextBox.Text)
+            && !string.IsNullOrWhiteSpace(UpdateOrbitTextBox.Text))
+            {
+                Updating(objectID, UpdateNameTextBox.Text, UpdateOwnerTextBox.Text, UpdateOrbitTextBox.Text, mainForm.dbFileName);
+                MessageBox.Show("Запись успешно изменена.", "Изменение");
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля", "Изменение");
+            }
+            this.Close();
+        }
+
+        public void Updating(int obj_ID, string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName)
+        {
             m_sqlCmd = new SQLiteCommand();
-            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
+            m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
             m_dbConn.Open();
             if (m_dbConn.State != ConnectionState.Open)
             {
@@ -35,7 +55,7 @@ namespace RPSLab4
                 string SQuery;
                 try
                 {
-                    m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName);
+                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);
                     m_dbConn.Open();
                     m_sqlCmd.Connection = m_dbConn;
                 }
@@ -43,35 +63,16 @@ namespace RPSLab4
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='"+ UpdateIDUpDown.Value +"'"; //Запрос с условием
+                SQuery = "SELECT * FROM ArtiSpaceObjects WHERE Obj_ID='" + obj_ID + "'"; //Запрос с условием
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQuery, m_dbConn);
                 adapter.Fill(dBTable);
-                if (dBTable.Rows.Count != 0)
-                {
-                    //Проверка введенных данных
-                    if (!string.IsNullOrWhiteSpace(UpdateNameTextBox.Text)
-                    && !string.IsNullOrWhiteSpace(UpdateOwnerTextBox.Text) 
-                    && !string.IsNullOrWhiteSpace(UpdateOrbitTextBox.Text))
-                    {
-                        m_sqlCmd.CommandText = "UPDATE ArtiSpaceObjects SET Obj_name ='" + UpdateNameTextBox.Text + "'" +
-                            ", Obj_Owner ='" + UpdateOwnerTextBox.Text + "'," +
-                            " Obj_Orbit ='" + UpdateOrbitTextBox.Text + "'" +
-                            " WHERE Obj_ID ='" + UpdateIDUpDown.Value + "'"; //Запрос изменения
-                        m_sqlCmd.Connection = m_dbConn;
-                        m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
-                        MessageBox.Show("Запись успешно изменена.", "Изменение");
-                        m_dbConn.Close();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Заполните все поля", "Изменение");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("БД не содержит записи с данным идентификатором", "Изменение");
-                }
+                m_sqlCmd.CommandText = "UPDATE ArtiSpaceObjects SET Obj_name ='" + obj_Name + "'" +
+                    ", Obj_Owner ='" + obj_Owner + "'," +
+                    " Obj_Orbit ='" + obj_Orbit + "'" +
+                    " WHERE Obj_ID ='" + obj_ID + "'"; //Запрос изменения
+                m_sqlCmd.Connection = m_dbConn;
+                m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
+                m_dbConn.Close();
             }
             catch (Exception ex)
             {
@@ -84,6 +85,14 @@ namespace RPSLab4
         private void UpdateForm_FormClosed(object sender, FormClosedEventArgs e) //При закрытии формы
         {
             mainForm.Activate();
+        }
+
+        private void UpdateForm_Load(object sender, EventArgs e)
+        {
+            objectID = spaceobj.objID;
+            UpdateNameTextBox.Text = spaceobj.objName;
+            UpdateOwnerTextBox.Text = spaceobj.objOwner;
+            UpdateOrbitTextBox.Text = spaceobj.objOrbit;
         }
     }
 }

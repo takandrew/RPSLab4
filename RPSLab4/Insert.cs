@@ -18,8 +18,26 @@ namespace RPSLab4
 
         private void AddingButton_Click(object sender, EventArgs e) //Нажатие кнопки "Добавить"
         {
+            //Проверка введенных данных
+            if (!string.IsNullOrWhiteSpace(AddNameTextBox.Text)
+                && !string.IsNullOrWhiteSpace(AddOwnerTextBox.Text)
+                && !string.IsNullOrWhiteSpace(AddOrbitTextBox.Text))
+            {
+                Inserting(AddNameTextBox.Text, AddOwnerTextBox.Text, AddOrbitTextBox.Text, mainForm.dbFileName);
+                MessageBox.Show("Запись успешно добавлена.", "Добавление");
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля", "Добавление");
+                return;
+            }
+            this.Close();
+        }
+
+        public void Inserting(string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName)
+        {
             m_sqlCmd = new SQLiteCommand();
-            m_dbConn = new SQLiteConnection("Data Source=" + mainForm.dbFileName); //Создание соединения
+            m_dbConn = new SQLiteConnection("Data Source=" + dbFileName); //Создание соединения
             m_dbConn.Open();
             if (m_dbConn.State != ConnectionState.Open)
             {
@@ -28,24 +46,12 @@ namespace RPSLab4
             }
             try
             {
-                //Проверка введенных данных
-                if (!string.IsNullOrWhiteSpace(AddNameTextBox.Text)
-                    && !string.IsNullOrWhiteSpace(AddOwnerTextBox.Text)
-                    && !string.IsNullOrWhiteSpace(AddOrbitTextBox.Text))
-                {
-                    m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
-                    " ('Obj_Name', 'Obj_Owner', 'Obj_Orbit') values ('" + AddNameTextBox.Text + "'," +
-                    " '" + AddOwnerTextBox.Text + "', '" + AddOrbitTextBox.Text + "')"; //Запрос добавления
-                    m_sqlCmd.Connection = m_dbConn;
-                    m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
-                    MessageBox.Show("Запись успешно добавлена.", "Добавление");
-                    m_dbConn.Close();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Заполните все поля", "Добавление");
-                }
+                m_sqlCmd.CommandText = "INSERT INTO ArtiSpaceObjects" +
+                    " ('Obj_Name', 'Obj_Owner', 'Obj_Orbit') values ('" + obj_Name + "'," +
+                    " '" + obj_Owner + "', '" + obj_Orbit + "')"; //Запрос добавления
+                m_sqlCmd.Connection = m_dbConn;
+                m_sqlCmd.ExecuteNonQuery(); //Выполнение запроса
+                m_dbConn.Close();
             }
             catch (Exception ex)
             {

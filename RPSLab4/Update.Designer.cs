@@ -36,14 +36,11 @@ namespace RPSLab4
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.UpdateIDUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.UpdateIDUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // UpdatingButton
             // 
-            this.UpdatingButton.Location = new System.Drawing.Point(12, 275);
+            this.UpdatingButton.Location = new System.Drawing.Point(12, 203);
             this.UpdatingButton.Name = "UpdatingButton";
             this.UpdatingButton.Size = new System.Drawing.Size(358, 48);
             this.UpdatingButton.TabIndex = 0;
@@ -53,21 +50,21 @@ namespace RPSLab4
             // 
             // UpdateNameTextBox
             // 
-            this.UpdateNameTextBox.Location = new System.Drawing.Point(24, 111);
+            this.UpdateNameTextBox.Location = new System.Drawing.Point(25, 45);
             this.UpdateNameTextBox.Name = "UpdateNameTextBox";
             this.UpdateNameTextBox.Size = new System.Drawing.Size(325, 22);
             this.UpdateNameTextBox.TabIndex = 1;
             // 
             // UpdateOwnerTextBox
             // 
-            this.UpdateOwnerTextBox.Location = new System.Drawing.Point(24, 169);
+            this.UpdateOwnerTextBox.Location = new System.Drawing.Point(25, 103);
             this.UpdateOwnerTextBox.Name = "UpdateOwnerTextBox";
             this.UpdateOwnerTextBox.Size = new System.Drawing.Size(325, 22);
             this.UpdateOwnerTextBox.TabIndex = 2;
             // 
             // UpdateOrbitTextBox
             // 
-            this.UpdateOrbitTextBox.Location = new System.Drawing.Point(24, 228);
+            this.UpdateOrbitTextBox.Location = new System.Drawing.Point(25, 162);
             this.UpdateOrbitTextBox.Name = "UpdateOrbitTextBox";
             this.UpdateOrbitTextBox.Size = new System.Drawing.Size(325, 22);
             this.UpdateOrbitTextBox.TabIndex = 3;
@@ -75,7 +72,7 @@ namespace RPSLab4
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 91);
+            this.label1.Location = new System.Drawing.Point(22, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 17);
             this.label1.TabIndex = 4;
@@ -84,7 +81,7 @@ namespace RPSLab4
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 149);
+            this.label2.Location = new System.Drawing.Point(22, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 17);
             this.label2.TabIndex = 5;
@@ -93,35 +90,17 @@ namespace RPSLab4
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 208);
+            this.label3.Location = new System.Drawing.Point(22, 142);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "Орбита объекта";
             // 
-            // UpdateIDUpDown
-            // 
-            this.UpdateIDUpDown.Location = new System.Drawing.Point(135, 46);
-            this.UpdateIDUpDown.Name = "UpdateIDUpDown";
-            this.UpdateIDUpDown.Size = new System.Drawing.Size(114, 22);
-            this.UpdateIDUpDown.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(109, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 17);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Идентификатор объекта";
-            // 
             // UpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 337);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.UpdateIDUpDown);
+            this.ClientSize = new System.Drawing.Size(382, 260);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -133,7 +112,7 @@ namespace RPSLab4
             this.Name = "UpdateForm";
             this.Text = "Изменение";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UpdateForm_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.UpdateIDUpDown)).EndInit();
+            this.Load += new System.EventHandler(this.UpdateForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,7 +127,5 @@ namespace RPSLab4
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown UpdateIDUpDown;
-        private System.Windows.Forms.Label label4;
     }
 }
