@@ -149,7 +149,7 @@ namespace RPSLab4
         {
             int rowNum = DGridTable.CurrentCell.RowIndex;
             spaceObject.objID = Convert.ToInt32(DGridTable.Rows[rowNum].Cells[0].Value);
-            if (MessageBox.Show("Вы уверены, что хотите удалить запись с идентификатором: '" + spaceObject.objID + "'", "Удаление", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Вы уверены, что хотите удалить запись с идентификатором: '" + spaceObject.objID + "'?", "Удаление", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Deleting(spaceObject.objID, dbFileName);
                 MessageBox.Show("Запись успешно удалена.", "Удаление");
