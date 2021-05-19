@@ -142,7 +142,6 @@ namespace RPSLab4
                 showUpdateForm.Show();
                 showUpdateForm.Focus();
             }
-            
         }
 
         private void DeleteButton_Click(object sender, EventArgs e) //Нажатие кнопки "Удалить"
@@ -157,7 +156,7 @@ namespace RPSLab4
             UpdateTable();
         }
 
-        public void Deleting(int obj_ID, string dbFileNameD)
+        public void Deleting(int obj_ID, string dbFileNameD) //Удаление записи из БД
         {
             try
             {

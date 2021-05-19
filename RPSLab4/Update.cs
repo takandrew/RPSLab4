@@ -37,7 +37,7 @@ namespace RPSLab4
             this.Close();
         }
 
-        public void Updating(int obj_ID, string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName)
+        public void Updating(int obj_ID, string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName) //Изменение записи в БД
         {
             m_sqlCmd = new SQLiteCommand();
             m_dbConn = new SQLiteConnection("Data Source=" + dbFileName);

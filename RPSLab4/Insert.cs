@@ -34,7 +34,7 @@ namespace RPSLab4
             this.Close();
         }
 
-        public void Inserting(string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName)
+        public void Inserting(string obj_Name, string obj_Owner, string obj_Orbit, string dbFileName) //Добавление записи в БД
         {
             m_sqlCmd = new SQLiteCommand();
             m_dbConn = new SQLiteConnection("Data Source=" + dbFileName); //Создание соединения
