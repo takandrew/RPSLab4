@@ -150,13 +150,13 @@ namespace RPSLab4
             spaceObject.objID = Convert.ToInt32(DGridTable.Rows[rowNum].Cells[0].Value);
             if (MessageBox.Show("Вы уверены, что хотите удалить запись с идентификатором: '" + spaceObject.objID + "'?", "Удаление", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                Deleting(spaceObject.objID, dbFileName);
-                MessageBox.Show("Запись успешно удалена.", "Удаление");
+                if (Deleting(spaceObject.objID, dbFileName))
+                    MessageBox.Show("Запись успешно удалена.", "Удаление");
             }
             UpdateTable();
         }
 
-        public void Deleting(int obj_ID, string dbFileNameD) //Удаление записи из БД
+        public bool Deleting(int obj_ID, string dbFileNameD) //Удаление записи из БД
         {
             try
             {
@@ -165,7 +165,8 @@ namespace RPSLab4
                 m_sqlCmd1 = new SQLiteCommand();
                 m_dbConn1.Open();
                 m_sqlCmd1.Connection = m_dbConn1;
-                m_sqlCmd1.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID ='" + obj_ID + "'"; //Запрос удаления
+                m_sqlCmd1.CommandText = "DELETE FROM ArtiSpaceObjects WHERE Obj_ID = @Obj_ID"; //Запрос удаления
+                m_sqlCmd1.Parameters.Add("@Obj_ID", DbType.Int32).Value = obj_ID;
                 m_sqlCmd1.ExecuteNonQuery(); //Выполнение запроса
                 m_dbConn1.Close();
             }
@@ -173,8 +174,9 @@ namespace RPSLab4
             {
                 MessageBox.Show(ex.Message, "Ошибка");
                 m_dbConn1.Close();
-                return;
+                return false;
             }
+            return true;
         }
 
         private void SaveDataToolStripMenuItem_Click(object sender, EventArgs e) //Сохранение таблицы в файл
